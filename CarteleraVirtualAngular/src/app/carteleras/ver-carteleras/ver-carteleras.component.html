@@ -1,0 +1,29 @@
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100">
+        <table>
+          <thead>
+            <tr class="table100-head">
+              <th class="column1">Titulo</th>
+              <th class="column2">Sub-titulo</th>
+              <th class="column3">Dueños</th>
+              <th class="column3">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor='let cartelera of carteleras$?.reverse()'>
+                  <td class="column1"><b>{{ cartelera.titulo }} </b></td>
+                  <td class="column2"><b>{{ cartelera.id }}</b></td>
+                  <td class="column3"><b>{{ cartelera.creador }}</b></td>
+                  <td class="column3">
+                    <button class="btn-primary btn-lg btn-block mt-1 mb-1"> Ver </button>
+                  </td>
+                </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

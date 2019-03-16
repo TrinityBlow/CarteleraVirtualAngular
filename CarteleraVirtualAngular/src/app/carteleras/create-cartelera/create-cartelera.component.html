@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <div class="card text-center mt-2">
+      <div class="card-header bg-dark  mb-1 text-light">
+        <h2> Crear Cartelera </h2>
+      </div>
+      <div class="card-body">
+          <form [formGroup]="createCarteleraForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                  <label for="titulo">Titulo Cartelera</label>
+                  <input type="text" formControlName="titulo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.titulo.errors }" />
+                  <div *ngIf="submitted && f.titulo.errors" class="invalid-feedback">
+                      <div *ngIf="f.titulo.errors.required">Titulo es requerido</div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="titulo">Categoria de la Cartelera</label>
+                <select class="form-control" data-live-search="true" formControlName="categoria" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoria.errors }" >
+                    <option *ngFor='let categoria of categorias$' value='{{categoria.tipo}}'>{{ categoria.tipo }}</option>
+                </select>
+                <div *ngIf="submitted && f.categoria.errors" class="invalid-feedback">
+                    <div *ngIf="f.categoria.errors.required">Categoria es requerido</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <button [disabled]="loading" class="btn btn-primary">Crear Cartelera</button>
+                  <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </div>
+              <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+              <div *ngIf="success" class="alert alert-success">{{success}}</div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

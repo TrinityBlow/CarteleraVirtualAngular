@@ -1,0 +1,37 @@
+<div id="mySidenav" class="sidenav">
+  <ul id="sidenavContent" class="list-group text-white">
+		<li > <a routerLink="home" routerLinkActive="active">Inicio</a> </li>
+		<div *ngIf="currentUser;then login else not_login">here is ignored</div>    
+		<ng-template #login>
+				<li> <a routerLink="carteleras/ver-carteleras" routerLinkActive="active"> Ver Cartelera </a> </li>
+			<div *ngIf="currentUser.rol == 'admin';">
+					<li> <a routerLink="carteleras/create-cartelera" routerLinkActive="active"> Crear Cartelera </a> </li>
+					<li> <a routerLink="create-user" routerLinkActive="active"> Crear Usuario </a> </li>
+			</div>    
+			<li > <a  routerLink="" routerLinkActive="disable" class="navbar-right" (click)="logout()">Salir</a></li>
+		</ng-template>
+		<ng-template #not_login>
+				<li > <a routerLink="login" routerLinkActive="active" class="navbar-right">Login</a></li>
+		</ng-template>
+  </ul>
+</div>
+
+<div id="main">
+	    <!-- Page Content -->
+	  <div class="container">
+				<span style="font-size:30px;cursor:pointer" onclick="menu()">&#9776; Menu</span>
+
+			<router-outlet></router-outlet>
+	
+		<!-- Footer -->
+	    <footer class="py-5 bg-dark mt-4">
+	      <div class="container">
+	        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+	      </div>
+	    </footer>
+	  </div>
+	  <!-- /.container -->
+
+	    
+	 </div>
+

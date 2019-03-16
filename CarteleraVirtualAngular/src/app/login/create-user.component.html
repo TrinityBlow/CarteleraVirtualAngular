@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-sm-6">
+      <div class="card text-center mt-2">
+        <div class="card-header bg-dark  mb-1 text-light">
+          <h2> Crear Usuario </h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="nombre">Nombre de usuario</label>
+                    <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                    <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                        <div *ngIf="f.nombre.errors.required">Nombre es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido de usuario</label>
+                    <input type="text" formControlName="apellido" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.apellido.errors }" />
+                    <div *ngIf="submitted && f.apellido.errors" class="invalid-feedback">
+                        <div *ngIf="f.apellido.errors.required">Apellido es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="emailC">Email de usuario</label>
+                    <input type="emailC" formControlName="emailC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.emailC.errors }" />
+                    <div *ngIf="submitted && f.emailC.errors" class="invalid-feedback">
+                        <div *ngIf="f.emailC.errors.required">Email es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p for="rol">Rol del usuario</p>
+                    <label class="radio-inline mr-2"> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=1 checked="checked"  > Administrador </label>
+                    <label class="radio-inline mr-2"> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=2 > Docente </label>
+                    <label class="radio-inline mr-2"> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=3 > Publicador </label>
+                    <label class="radio-inline mr-2 "> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=4 > Alumno </label>
+                    <div *ngIf="submitted && f.rol.errors" class="invalid-feedback">
+                        <div *ngIf="f.rol.errors.required">Rol es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordC">Contraseña</label>
+                    <input type="password" formControlName="passwordC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passwordC.errors }" />
+                    <div *ngIf="submitted && f.passwordC.errors" class="invalid-feedback">
+                        <div *ngIf="f.passwordC.errors.required">Password es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">Crear</button>
+                    <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </div>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                <div *ngIf="success" class="alert alert-success">{{success}}</div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
