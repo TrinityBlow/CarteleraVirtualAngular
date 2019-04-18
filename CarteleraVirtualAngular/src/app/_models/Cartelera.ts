@@ -1,4 +1,8 @@
-export class Cartelera {
+import { Categoria } from '_models/Categoria'
+
+export interface Cartelera {
     id: number;
-    nombre: string;
+    titulo: string;
+    creador: string;
+    categoria: Categoria;
 }

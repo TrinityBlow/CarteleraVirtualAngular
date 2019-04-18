@@ -1,0 +1,31 @@
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100">
+        <table>
+          <thead>
+            <tr class="table100-head">
+              <th class="column1">Titulo</th>
+              <th class="column3">Dueños</th>
+              <th class="column3">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor='let cartelera of carteleras$?.reverse()'>
+                  <td class="column1"><b>{{ cartelera.titulo }} </b></td>
+                  <td class="column3"><b>{{ cartelera.creador }}</b></td>
+                  <td class="column3">
+                    <button class="btn-primary btn-lg btn-block mt-1 mb-1" routerLink="carteleras/ver-cartelera" routerLinkActive="active"> Ver </button>
+                    <div *ngIf="currentUser.rol == 'admin';">
+                      <button class="btn-warning btn-lg btn-block mt-1 mb-1" routerLink="carteleras/modificar-cartelera" routerLinkActive="active"> Modificar </button>
+                      <button class="btn-danger btn-lg btn-block mt-1 mb-1" mat-raised-button (click)="openDialog(  cartelera  )"> Borrar </button>          
+                  </div>    
+                  </td>
+                </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -63,5 +63,4 @@
 .sidenav>ul>li:last-child {
     position: fixed;
 	bottom: 0;
-	overlay: none;
 }

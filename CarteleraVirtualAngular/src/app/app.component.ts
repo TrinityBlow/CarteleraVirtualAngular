@@ -9,7 +9,7 @@ import { User } from './_models';
   templateUrl: './app.component.html'
 })
 
-@Component({ selector: 'app', templateUrl: 'app.component.html' })
+@Component({ selector: 'app', templateUrl: 'app.component.html'})
 export class AppComponent {
     currentUser: User;
 

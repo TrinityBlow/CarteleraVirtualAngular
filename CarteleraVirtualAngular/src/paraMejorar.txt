@@ -1,0 +1,5 @@
+1   |||||  Dialog de borrar cuando se cierra utiliza afterclose para renovar la lista 
+cada vez que se cierra, buscar como actualizar a demanda para no hacer llamadas
+innecesarias a la base de datos.
+
+2   |||||  Material Table solo funciona el sort con la primera columna

@@ -19,6 +19,9 @@
                 <select class="form-control" data-live-search="true" formControlName="categoria" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoria.errors }" >
                     <option *ngFor='let categoria of categorias$' value='{{categoria.tipo}}'>{{ categoria.tipo }}</option>
                 </select>
+                <div *ngIf="categoriasSize$ < 1" class="alert alert-warning" role="alert" >
+                  <p><b>No hay ninguna categoria creada</b></p>
+                </div>
                 <div *ngIf="submitted && f.categoria.errors" class="invalid-feedback">
                     <div *ngIf="f.categoria.errors.required">Categoria es requerido</div>
                 </div>

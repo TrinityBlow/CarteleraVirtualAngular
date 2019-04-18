@@ -3,15 +3,16 @@
 		<li > <a routerLink="home" routerLinkActive="active">Inicio</a> </li>
 		<div *ngIf="currentUser;then login else not_login">here is ignored</div>    
 		<ng-template #login>
-				<li> <a routerLink="carteleras/ver-carteleras" routerLinkActive="active"> Ver Cartelera </a> </li>
+				<li> <a routerLink="carteleras/ver-carteleras" routerLinkActive="active"> Carteleras </a> </li>
 			<div *ngIf="currentUser.rol == 'admin';">
 					<li> <a routerLink="carteleras/create-cartelera" routerLinkActive="active"> Crear Cartelera </a> </li>
+					<li> <a routerLink="categorias/ver-categorias" routerLinkActive="active"> Categoria </a> </li>
 					<li> <a routerLink="create-user" routerLinkActive="active"> Crear Usuario </a> </li>
 			</div>    
-			<li > <a  routerLink="" routerLinkActive="disable" class="navbar-right" (click)="logout()">Salir</a></li>
+			<li > <a  routerLink="" routerLinkActive="disable" class="navbar-right" (click)="logout()" id="lastElement">Salir</a></li>
 		</ng-template>
 		<ng-template #not_login>
-				<li > <a routerLink="login" routerLinkActive="active" class="navbar-right">Login</a></li>
+				<li > <a routerLink="login" routerLinkActive="active" class="navbar-right" id="lastElement">Login</a></li>
 		</ng-template>
   </ul>
 </div>

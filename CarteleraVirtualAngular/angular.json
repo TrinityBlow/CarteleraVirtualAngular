@@ -23,15 +23,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/bootstrap/bootstrapBusiness/vendor/bootstrap/css/bootstrap.min.css",
+              "src/app/bootstrap/bootstrap-4.3.1-dist/css/bootstrap.min.css",
               "src/app/bootstrap/sidebar/sidebar.css",
-              "src/app/bootstrap/bootstrapBusiness/css/business-frontpage.css",
-              "src/app//bootstrap/table/css/main.css"
+              "src/app/bootstrap/table/css/main.css",
+              "src/app/general-changes.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": [
               "src/app/bootstrap/sidebar/sidebar.js",
-              "src/app/bootstrap/bootstrapBusiness/vendor/jquery/jquery.min.js",
-              "src/app//bootstrap/table/js/main.js"
+              "src/app/bootstrap/bootstrap-4.3.1-dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {

@@ -7,11 +7,13 @@ function menu() {
 	if(marginLMain == "250px"){
 		document.getElementById("mySidenav").style.width = "0";
 		document.getElementById("main").style.marginLeft = "0";
-		document.getElementById("sidenavContent").style.position = "absolute";
+		document.getElementById("lastElement").style.position = "absolute";
+		document.getElementById("lastElement").style.bottom = "";
 	} else{
 		document.getElementById("mySidenav").style.width = "250px";
 		document.getElementById("main").style.marginLeft = "250px";
-		document.getElementById("sidenavContent").lastChild.style.position = "fixed";
+		document.getElementById("lastElement").style.position = "fixed";
+		document.getElementById("lastElement").style.bottom = 0;
 	}
 	
 }

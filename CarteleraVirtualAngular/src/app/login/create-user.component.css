@@ -1,0 +1,3 @@
+.height-buttom {
+    height: calc(0.75em + .75rem + 2px);
+}

@@ -12,33 +12,23 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getHeaders(){
-    return {'token':'2123456'};
-  }
-
   getBody(){
     return 3;
   }
   
   getCartelerasCant() {
     let url = `${env.url}/carteleras/cantidad`;
-    let headers = this.getHeaders();
     let body = this.getBody();
 
-    return this.http.post(url,body,{
-      headers: headers
-    });
+    return this.http.post(url,body);
 
 
   }
 
   getCategorias() {
     let url = `${env.url}/categorias`;
-    let headers = this.getHeaders();
 
-    return this.http.get(url,{
-      headers: headers
-    });
+    return this.http.get(url);
 
 
   }
@@ -54,6 +44,13 @@ export class DataService {
     });
   }
 
+  createCategoria(formC){
+    let url = `${env.url}/categorias`;
+    return this.http.post(url,{
+      tipo: formC.tipoC.value
+    });
+  }
+
   createCartelera(formC,adminEmail){
     let url = `${env.url}/carteleras`;
     return this.http.post(url,{
@@ -65,12 +62,27 @@ export class DataService {
 
   getCarteleras() {
     let url = `${env.url}/carteleras`;
-    let headers = this.getHeaders();
 
-    return this.http.get(url,{
-      headers: headers
+    return this.http.get(url);
+
+  }
+
+  
+
+  deleteCartelera(cartelera){
+    
+    let url = `${env.url}/carteleras/${cartelera.id}`;
+    return this.http.delete(url);
+    
+  }
+
+  deleteCarteleraTitulo(cartelera){
+    let url = `${env.url}/carteleras`;
+    
+    return this.http.patch(url,{
+      titulo: cartelera.titulo
     });
-
+    
   }
     //  return this.http.get('http://localhost:8080/CarteleraVirtual/carteleras')
 }

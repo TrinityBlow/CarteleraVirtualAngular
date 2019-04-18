@@ -14,6 +14,7 @@ import { User } from '_models';
 export class CreateCarteleraComponent implements OnInit {
 
   categorias$: Object;
+  categoriasSize$: number;
   currentUser: User;
   createCarteleraForm: FormGroup;
   loading = false;
@@ -33,6 +34,7 @@ export class CreateCarteleraComponent implements OnInit {
 }
 
   ngOnInit() {
+    this.categorias$ = null;
     this.createCarteleraForm = this.formBuilder.group({
         titulo: ['', Validators.required],
         categoria: ['', Validators.required]
@@ -41,6 +43,11 @@ export class CreateCarteleraComponent implements OnInit {
     this.data.getCategorias()
     .subscribe(
       data => this.categorias$ =  data
+    )
+
+    this.data.getCategorias()
+    .subscribe(
+      data => this.categoriasSize$ = Object.values(data).length
     )
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/create-cartelera'; 

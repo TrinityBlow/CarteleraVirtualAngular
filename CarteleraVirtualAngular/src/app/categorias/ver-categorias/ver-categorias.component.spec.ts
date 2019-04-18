@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RxjsTestComponent } from './rxjs-test.component';
+import { VerCategoriasComponent } from './ver-categorias.component';
 
-describe('RxjsTestComponent', () => {
-  let component: RxjsTestComponent;
-  let fixture: ComponentFixture<RxjsTestComponent>;
+describe('VerCategoriasComponent', () => {
+  let component: VerCategoriasComponent;
+  let fixture: ComponentFixture<VerCategoriasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RxjsTestComponent ]
+      declarations: [ VerCategoriasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RxjsTestComponent);
+    fixture = TestBed.createComponent(VerCategoriasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -27,12 +27,12 @@
                         <div *ngIf="f.emailC.errors.required">Email es requerido</div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
                     <p for="rol">Rol del usuario</p>
-                    <label class="radio-inline mr-2"> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=1 checked="checked"  > Administrador </label>
-                    <label class="radio-inline mr-2"> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=2 > Docente </label>
-                    <label class="radio-inline mr-2"> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=3 > Publicador </label>
-                    <label class="radio-inline mr-2 "> <input type="radio" class="form-control"  formControlName="rol" name="rol" value=4 > Alumno </label>
+                    <label class="radio-inline mr-2 "> <input type="radio" class="form-control height-buttom"  formControlName="rol" name="rol" value=1 checked="checked"  > Administrador </label>
+                    <label class="radio-inline mr-2"> <input type="radio" class="form-control height-buttom"  formControlName="rol" name="rol" value=2 > Docente </label>
+                    <label class="radio-inline mr-2"> <input type="radio" class="form-control height-buttom"  formControlName="rol" name="rol" value=3 > Publicador </label>
+                    <label class="radio-inline mr-2 "> <input type="radio" class="form-control height-buttom"  formControlName="rol" name="rol" value=4 > Alumno </label>
                     <div *ngIf="submitted && f.rol.errors" class="invalid-feedback">
                         <div *ngIf="f.rol.errors.required">Rol es requerido</div>
                     </div>
