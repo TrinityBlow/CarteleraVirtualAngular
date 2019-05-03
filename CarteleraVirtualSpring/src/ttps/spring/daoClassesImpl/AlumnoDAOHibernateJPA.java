@@ -21,9 +21,9 @@ public class AlumnoDAOHibernateJPA extends GenericDAOHibernateJPA<Alumno> implem
 	**/
 	public Alumno recuperarUsuario(String email) {
 		EntityManager mf = this.getEntityManager();
-		Query consulta = mf.createQuery("select p from Usuario p where p.email =? AND p.activo =?");
-		consulta.setParameter(1, email);
-		consulta.setParameter(2, 1);
+		Query consulta = mf.createQuery("select p from Usuario p where p.email = :email AND p.activo = :activo");
+		consulta.setParameter("email", email);
+		consulta.setParameter("activo", 1);
 		Alumno resultado;
 		try {
 			resultado = (Alumno)consulta.getSingleResult();

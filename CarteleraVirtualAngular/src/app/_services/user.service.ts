@@ -1,17 +1,23 @@
 import { Injectable }   from '@angular/core';
 import { HttpClient }   from '@angular/common/http';
 import { Observable }   from 'rxjs';
+import { SimpleUser }   from '../_models/SimpleUser';
+import { environment as env } from '../../environments/environment';
 
-import { UserGit } from '_models/userGit';
 
 @Injectable()
 export class UserService {
-  private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
+  url = `${env.url}/usuarios`;
 
   constructor(private http: HttpClient) { }
 
-  getUser(): Observable<UserGit[]> {
-    return this.http.get<UserGit[]>(this.serviceUrl);
+  getUsersOwners(){
+    return this.http.get<SimpleUser[]>(`${this.url}/owners`);
   }
+
+
+  getUsers():Observable<SimpleUser[]>{
+    return this.http.get<SimpleUser[]>(`${this.url}`);
+  }      
 
 }

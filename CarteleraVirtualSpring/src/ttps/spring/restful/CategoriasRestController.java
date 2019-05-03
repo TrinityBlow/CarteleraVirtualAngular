@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ttps.spring.daoClasses.CategoriaDAO;
 import ttps.spring.modelCartelera.Categoria;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RestController
 public class CategoriasRestController {
 	

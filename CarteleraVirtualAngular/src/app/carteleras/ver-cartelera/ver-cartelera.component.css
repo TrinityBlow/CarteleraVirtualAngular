@@ -1,0 +1,32 @@
+.mat-header-row {
+    background-color: #36304a;
+  }
+  
+  .mat-header-cell{
+    font-family: OpenSans-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+  }
+  
+  .mat-cell{
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #303030;
+    line-height: 1.2;
+    font-weight: unset;
+  }
+  
+  tr:nth-child(even) {background: #CCC}
+  
+  .mat-paginator{
+    font-family: OpenSans-Regular;
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: unset;
+  }
+  
+  ::ng-deep .mat-select {
+    font-size: 18px;
+  }

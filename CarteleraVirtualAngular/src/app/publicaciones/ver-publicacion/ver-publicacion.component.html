@@ -1,0 +1,67 @@
+<div *ngIf="publicacion$ != null;">
+
+  <div class="row align-items-center justify-content-center">
+    <mat-card class="card-titulo border">
+      <mat-card-header class="card-header-titulo d-flex justify-content-center card-header-pub rounded">
+        <mat-card-title><b class='title-pub b-title'>{{publicacion$.cartelera.titulo}}</b></mat-card-title>
+      </mat-card-header>
+      <div class="row align-items-center justify-content-center mt-1">
+        <mat-card-header class="card-header-titulo d-flex justify-content-center card-subheader-pub rounded">
+          <mat-card-title><b class='subtitle-pub b-subtitle'>{{publicacion$.titulo}}</b></mat-card-title>
+        </mat-card-header>
+      </div>
+      <div class="row align-items-center justify-content-center mt-1">
+        <mat-card-content class="align-items-left">
+          <p class="p-text">
+            {{publicacion$.nota}}
+          </p>
+        </mat-card-content>
+      </div>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="card-pub mt-3 border">
+      <mat-card-header class="card-header-pub d-flex justify-content-center rounded">
+        <mat-card-title><b class="b-title">Comentarios</b></mat-card-title>
+      </mat-card-header>
+      
+        <div class="row justify-content-end col-12 mt-2">
+          <div class="row justify-content-center col-12" *ngIf=" (currentUser.rol == 'alumno') && (publicacion$.comHabilitado == 1) ">
+            <label class="col-12 mt-1 p-text text-center" for="titulo"><b>Espacio de comentario</b></label>
+            <textarea  class="col-11 arregloMargin p-text" rows="6" #newHeroComentario
+            (blur)="addHeroComentario(newHeroComentario.value); newHeroComentario.value='' " ></textarea>
+            <button class="col-2 btn btn-primary mt-1 arregloMargin" (click)="addHeroComentario(newHeroComentario.value)">Comentar</button>
+          </div>
+        </div>
+      <mat-card-content class='card-titulo border mt-3' *ngFor="let comentario of comentarios$;">
+        <div class="row justify-content-end">
+          <p class="p-text col-12">
+            <b>{{comentario.alumno.nombre}} {{comentario.alumno.nombre}}, comento: </b>
+          </p>
+          <p class="p-text col-12 mt-1">
+            {{comentario.comentario}}
+          </p>          
+          <div class="col-12" *ngIf="(comentario.respuesta != null); else inputRespuesta">
+            <div class="row justify-content-end">
+              <p class="p-text col-11 mt-3">
+                <b>{{comentario.respondio.nombre}} {{comentario.respondio.nombre}}, respondio: </b>
+              </p>
+              <p class="p-text col-11 mt-1">
+                {{comentario.respuesta}}
+              </p>
+            </div>
+          </div>
+          <ng-template #inputRespuesta>
+            <div class="row justify-content-end col-12 mt-2" *ngIf="(currentUser.rol != 'alumno');">
+                <textarea  class="col-11 arregloMargin p-text" rows="6" #newHero
+                (blur)="addHero(newHero.value, comentario); newHero.value='' " ></textarea>
+              <button class="col-2 btn btn-primary mt-1 arregloMargin" (click)="addHero(newHero.value, comentario)">Responder</button>
+            </div>
+          </ng-template>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

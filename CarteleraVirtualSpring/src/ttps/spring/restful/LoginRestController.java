@@ -47,7 +47,8 @@ public class LoginRestController {
         // recupero el usuario de la base de usuarios
         Usuario u = usuarioDAO.recuperarUsuario(username);
         rol = u.getRol();
-        
+
+        System.out.println("ASDASD");    
         // chequeo que el usuario exista y el password sea correcto
         return (u != null && u.getPass().equals(password));
     }

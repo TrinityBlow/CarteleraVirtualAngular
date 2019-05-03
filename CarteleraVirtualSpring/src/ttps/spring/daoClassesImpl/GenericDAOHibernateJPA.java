@@ -52,6 +52,7 @@ public class GenericDAOHibernateJPA<T extends Activable> implements GenericDAO<T
 		T entityUpdate = this.getEntityManager().merge(entity);
 		return entityUpdate;
 	} 
+	
 
 	public void borrar(T entity) {
 		this.getEntityManager().remove(entity);

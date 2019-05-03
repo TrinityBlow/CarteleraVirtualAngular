@@ -24,11 +24,11 @@ public class CarteleraDAOHibernateJPA extends GenericDAOHibernateJPA<Cartelera> 
 		super(Cartelera.class);
 	}
 
-	public Cartelera recuperarCartelera(String nombre) {
+	public Cartelera recuperarCartelera(String titulo) {
 		EntityManager mf = this.getEntityManager();
-		Query consulta = mf.createQuery("select p from Cartelera p where p.nombre =? AND p.activo =?");
-		consulta.setParameter(1, nombre);
-		consulta.setParameter(2, 1);
+		Query consulta = mf.createQuery("select p from Cartelera p where p.titulo = :titulo AND p.activo = :activo");
+		consulta.setParameter("titulo", titulo);
+		consulta.setParameter("activo", 1);
 		Cartelera resultado;
 		try {
 			resultado = (Cartelera)consulta.getSingleResult();
@@ -49,8 +49,8 @@ public class CarteleraDAOHibernateJPA extends GenericDAOHibernateJPA<Cartelera> 
 		}
 	}
 
-	public Cartelera borrarLogico(String nombre) {
-		Cartelera entity = recuperarCartelera(nombre);
+	public Cartelera borrarLogico(String titulo) {
+		Cartelera entity = recuperarCartelera(titulo);
 		if (entity != null) {
 			this.borrarLogico(entity);
 		}
@@ -61,6 +61,7 @@ public class CarteleraDAOHibernateJPA extends GenericDAOHibernateJPA<Cartelera> 
 		Cartelera cartelera = super.recuperar(id);
 		if(cartelera != null) {
 			Hibernate.initialize(cartelera.getPublicaciones());
+			Hibernate.initialize(cartelera.getMiembros());
 		}
 		return cartelera;
 	}
@@ -72,6 +73,14 @@ public class CarteleraDAOHibernateJPA extends GenericDAOHibernateJPA<Cartelera> 
 			Hibernate.initialize(cartelera.getPublicaciones());
 		}
 		return carteleras;
+	}
+	
+	public Cartelera actualizarJoin(Cartelera cartelera) {
+		Cartelera carteleraActualizada = super.actualizar(cartelera);
+		if(carteleraActualizada != null) {
+			Hibernate.initialize(carteleraActualizada.getMiembros());
+		}
+		return carteleraActualizada;
 	}
 	
 

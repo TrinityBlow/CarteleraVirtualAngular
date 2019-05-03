@@ -54,9 +54,14 @@ public class Comentario extends Activable implements Serializable {
 		 return "Comentario: " + id + "||" + comentario + "||" + respuesta + "||" + fechaComentario + "||" + fechaRespuesta + "||" + activo;
 	 }
 
-	public void responder(Administrador admin, String respuesta) {
-		setRespondio(admin);
+	public void responder(Usuario respondio, String respuesta) {
+		setRespondio(respondio);
 		setRespuesta(respuesta);
+	}
+	
+	public void preguntar(Alumno preguntando, String pregunta) {
+		this.setAlumno(preguntando);
+		this.setComentario(pregunta);
 	}
  
 	 

@@ -1,12 +1,16 @@
 package ttps.spring.daoClassesImpl;
 
+import java.io.Serializable;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import ttps.spring.daoClasses.UsuarioDAO;
+import ttps.spring.modelCartelera.Categoria;
 import ttps.spring.modelCartelera.Usuario;
 
 
@@ -64,6 +68,20 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 			this.borrarLogico(entity);
 		}
 			return entity;
+	}
+	
+	public void initializeCartelera(Usuario cartelera) {
+		if(cartelera != null) {
+			Hibernate.initialize(cartelera.getCarteleras());
+		}
+	}
+	
+	public Usuario recuperarUsuarioJoin(String email) {
+		Usuario usuario = this.recuperarUsuario(email);
+		if(usuario != null) {
+			Hibernate.initialize(usuario.getCarteleras());
+		}
+		return usuario;
 	}
 
 

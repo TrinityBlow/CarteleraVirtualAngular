@@ -1,5 +1,8 @@
 package ttps.spring.restful;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.daoClasses.AdministradorDAO;
+import ttps.spring.daoClasses.DocenteDAO;
+import ttps.spring.daoClasses.PublicadorDAO;
 import ttps.spring.daoClasses.UsuarioDAO;
 import ttps.spring.modelCartelera.Administrador;
 import ttps.spring.modelCartelera.Alumno;
@@ -32,6 +37,10 @@ public class UsuariosRestController {
 	UsuarioDAO usuarioDAO;
 	@Autowired
 	AdministradorDAO administradorDAO;
+	@Autowired
+	DocenteDAO docenteDAO;
+	@Autowired
+	PublicadorDAO publicadorDAO;
 	
 	private Boolean canChange(String token, long id) {
 		if(TokenValidation.tokenValidation(token,id)) {
@@ -56,7 +65,24 @@ public class UsuariosRestController {
 	   }
 	   return new ResponseEntity<Usuario>(usuario, HttpStatus.NOT_FOUND);
 	}
+	
 
+	@GetMapping(path = "/usuarios/owners")
+	public ResponseEntity<List<Usuario>> getOwners(){
+	   List<Usuario> usuarios = new ArrayList<Usuario>();
+	   List<Publicador> publicadores = publicadorDAO.recuperarTodos();
+	   List<Docente> docentes = docenteDAO.recuperarTodos();
+	   usuarios.addAll(docentes);
+	   usuarios.addAll(publicadores);
+	   return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/usuarios")
+	public ResponseEntity<List<Usuario>> getUsuarios(){
+	   List<Usuario> usuarios = usuarioDAO.recuperarTodos();
+	   return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+	}
+	
 	@PostMapping(path = "/usuarios")
 	public ResponseEntity<Usuario> postUsuario(@RequestBody UsuarioRest usuario){
 		Usuario creado = null;

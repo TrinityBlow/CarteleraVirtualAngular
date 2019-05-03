@@ -1,5 +1,6 @@
 package ttps.spring.restful;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +21,11 @@ import ttps.spring.daoClasses.CarteleraDAO;
 import ttps.spring.daoClasses.DocenteDAO;
 import ttps.spring.daoClasses.PublicacionDAO;
 import ttps.spring.daoClasses.PublicadorDAO;
+import ttps.spring.daoClasses.UsuarioDAO;
 import ttps.spring.modelCartelera.Cartelera;
 import ttps.spring.modelCartelera.Publicacion;
 import ttps.spring.modelCartelera.Usuario;
+import ttps.spring.restful.jsonDTO.PublicacionJsonCrear;
 import ttps.spring.restfulClasses.PublicacionRestDTO;
 
 
@@ -39,18 +42,20 @@ public class PublicacionesRestController {
 	@Autowired
 	PublicadorDAO publicadorDAO;
 	@Autowired
+	UsuarioDAO usuarioDAO;
+	@Autowired
 	CarteleraDAO carteleraDAO;
 	
 	//Recupero todos los usuarios
 	@GetMapping(path = "/publicaciones")
-	public ResponseEntity<List<Publicacion>> listAllCategorias() {
+	public ResponseEntity<List<Publicacion>> listAllPublicacion() {
 		List<Publicacion> publicaciones = publicacionDAO.recuperarTodos();
 		return new ResponseEntity<List<Publicacion>>(publicaciones, HttpStatus.OK);
 	}
 	
 	//Recupero un test dado
 	@GetMapping(path = "/publicaciones/{id}")
-	public ResponseEntity<Publicacion> getCategoria(@PathVariable("id") long id) {
+	public ResponseEntity<Publicacion> getPublicacion(@PathVariable("id") long id) {
 		Publicacion publicacion = publicacionDAO.recuperar(id);
 		return new ResponseEntity<Publicacion>(publicacion, HttpStatus.OK);
 	}
@@ -68,9 +73,30 @@ public class PublicacionesRestController {
 		}
 		return user;
 	}
-
+	
+	
+	//implementar mas control para los usuarios que no son alumnos  usuarioNoAlumno(id)
 	@PostMapping(path = "/publicaciones")
-	public ResponseEntity<Publicacion> postCategoria(@RequestBody PublicacionRestDTO publicacionDTO){
+	public ResponseEntity<Publicacion> postPublicacionCustom(@RequestBody PublicacionJsonCrear publicacionDTO){
+		Publicacion publicacion = null;
+		Usuario user = usuarioDAO.recuperarUsuario(publicacionDTO.getCreador());
+		Cartelera cartelera = carteleraDAO.recuperar(publicacionDTO.getCarteleraId());
+		if(user != null && cartelera != null) {
+			publicacion = new Publicacion();
+			publicacion.setTitulo(publicacionDTO.getTitulo());
+			publicacion.setNota("");
+			publicacion.setImagen("");
+			publicacion.setComHabilitado(1);
+			publicacion.setFecha(Calendar.getInstance().getTime());
+			publicacion.setCreador(user);
+			publicacion.setCartelera(cartelera);
+			publicacionDAO.persistir(publicacion);	
+		}
+		return new ResponseEntity<Publicacion>(publicacion, HttpStatus.OK);
+	}
+
+	@PostMapping(path = "/publicaciones/old")
+	public ResponseEntity<Publicacion> postPublicacion(@RequestBody PublicacionRestDTO publicacionDTO){
 		Publicacion publicacion = null;
 		Usuario user = usuarioNoAlumno(publicacionDTO.getCreador());
 		Cartelera cartelera = carteleraDAO.recuperar(publicacionDTO.getCartelera());
@@ -89,20 +115,30 @@ public class PublicacionesRestController {
 	}
 	
 	@DeleteMapping(path = "/publicaciones/{id}")
-	public ResponseEntity<Publicacion> deleteCategoria(@PathVariable("id") long id){
+	public ResponseEntity<Publicacion> deletePublicacion(@PathVariable("id") long id){
 		Publicacion publicacion = publicacionDAO.borrarLogico(id);
 		return new ResponseEntity<Publicacion>(publicacion, HttpStatus.OK);
 	}
 	
 
 	@PutMapping(path = "/publicaciones/{id}")
-	public ResponseEntity<Publicacion> updateCategoria(@PathVariable("id") long id, @RequestBody PublicacionRestDTO publicacionDTO){
+	public ResponseEntity<Publicacion> updatePublicacion(@PathVariable("id") long id, @RequestBody PublicacionRestDTO publicacionDTO){
 		Publicacion publicacion = publicacionDAO.recuperar(id);
 		if(publicacion != null) {
 			if(publicacionDTO.getTitulo() != null) publicacion.setTitulo(publicacionDTO.getTitulo());
 			if(publicacionDTO.getNota() != null) publicacion.setNota(publicacionDTO.getNota());
 			if(publicacionDTO.getImagen() != null) publicacion.setImagen(publicacionDTO.getImagen());
 			if(publicacionDTO.getComHabilitado() != null) publicacion.setComHabilitado(publicacionDTO.getComHabilitado());
+			publicacion = publicacionDAO.actualizar(publicacion);
+		}
+		return new ResponseEntity<Publicacion>(publicacion, HttpStatus.OK);
+	}
+	
+	@PutMapping(path = "/publicaciones/toggleComentarios/{id}")
+	public ResponseEntity<Publicacion> toggleComentarios(@PathVariable("id") long id){
+		Publicacion publicacion = publicacionDAO.recuperar(id);
+		if(publicacion != null) {
+			publicacion.toggleComentarios();
 			publicacion = publicacionDAO.actualizar(publicacion);
 		}
 		return new ResponseEntity<Publicacion>(publicacion, HttpStatus.OK);

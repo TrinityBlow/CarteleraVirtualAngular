@@ -19,7 +19,6 @@ import ttps.spring.itemsSerializers.CategoriaItemSerializer;
 
 @Entity
 @Table(name="categoria")
-@JsonSerialize(using = CategoriaItemSerializer.class)
 public class Categoria extends Activable implements Serializable{
 
 

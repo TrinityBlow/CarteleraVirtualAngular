@@ -1,0 +1,32 @@
+
+<div class="row justify-content-center mt-3">
+  <div>
+  
+    <h3>Seleccion de Usuarios</h3>
+      <form  class='mt-3' (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <mat-form-field >
+              <mat-select  class="form-control" [formControl]="usuariosMultiCtrl" placeholder="Usuarios a Seleccionar" [multiple]="true" #multiSelect>
+                <ngx-mat-select-search  [formControl]="usuariosMultiFilterCtrl"></ngx-mat-select-search>
+                <mat-option *ngFor="let usuario of filteredUsuariosMulti | async" [value]="usuario">
+                  {{usuario.email}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group mt-1">
+            <button [disabled]="loading" class="btn btn-primary">Modificar Dueños</button>
+            <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+        <div *ngIf="error" class="alert alert-danger mt-2">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-2">{{success}}</div>
+      </form>
+    <p class='mt-3 mb-2'>
+      Usuarios Seleccionados:
+    </p>
+    <ul *ngFor="let usuario of usuariosMultiCtrl?.value" class='mb-1'>
+      <li>{{usuario.email}}</li>
+    </ul>
+
+  </div>
+</div>

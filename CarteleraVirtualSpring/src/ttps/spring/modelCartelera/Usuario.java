@@ -2,9 +2,14 @@ package ttps.spring.modelCartelera;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,11 +33,7 @@ public abstract class  Usuario extends Activable implements Serializable {
 	 private String email;
 	 private int activo = 1;
 
-	 @ManyToMany
-	 @JoinTable(name="usuario_cartelera",
-	 joinColumns = @JoinColumn(name="id_usuario",referencedColumnName="id_usuario"),
-	 inverseJoinColumns=@JoinColumn(name="id_cartelera",referencedColumnName="id_cartelera")
-	 )
+	 @ManyToMany(mappedBy="miembros")
 	 @JsonIgnore
 	private List<Cartelera> carteleras = new ArrayList<Cartelera>();
 
@@ -97,6 +98,12 @@ public abstract class  Usuario extends Activable implements Serializable {
 	
 	public String getRol() {
 		return "usuario";
+	}
+	
+	public void addCartelera(Cartelera cartelera) {
+		Set<Cartelera> set = new HashSet<>(this.carteleras);
+		this.carteleras.clear();
+		this.carteleras.addAll(set);
 	}
 
 	 

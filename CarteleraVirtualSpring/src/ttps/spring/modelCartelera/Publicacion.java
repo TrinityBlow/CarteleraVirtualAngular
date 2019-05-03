@@ -141,7 +141,13 @@ public class Publicacion extends Activable implements Serializable {
 		this.cartelera = cartelera;
 	}
 	
-	
+	public void toggleComentarios() {
+		if(this.getComHabilitado() == 1) {
+			this.setComHabilitado(0);
+		} else {
+			this.setComHabilitado(1);
+		}
+	}
 	 
 	
 }

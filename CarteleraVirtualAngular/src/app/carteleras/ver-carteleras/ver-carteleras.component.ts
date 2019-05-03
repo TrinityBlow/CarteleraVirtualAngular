@@ -27,7 +27,7 @@ export class VerCartelerasComponent implements OnInit {
   carteleraElegida: Object;
 
   //material table
-  displayedColumns: string[] = ['titulo', 'categoria', 'owners', 'acciones'];
+  displayedColumns: string[] = ['titulo', 'categoria', 'owners', 'fecha', 'acciones'];
   dataSource: MatTableDataSource<Cartelera>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -67,6 +67,12 @@ configureDataSource(dataService){
   this.dataSource =  new MatTableDataSource(dataService);
   this.dataSource.paginator = this.paginator;
   this.dataSource.sort = this.sort;
+  this.dataSource.sortingDataAccessor = (item, property) => {
+    switch(property) {
+      case 'categoria': return item.categoria.tipo;
+      default: return item[property];
+    }
+  };
 }
 
 //mat-paginator-range-label
@@ -77,11 +83,11 @@ configureDataSource(dataService){
 
     this.carteleraService.getCarteleras()
     .subscribe(
-      dataService => this.configureDataSource(dataService)
+      dataService => {
+        this.configureDataSource(dataService);
+      }
     )
-    
   }
-
 }
 
 @Component({

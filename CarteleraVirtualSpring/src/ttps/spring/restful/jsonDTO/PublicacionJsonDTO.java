@@ -11,6 +11,9 @@ public class PublicacionJsonDTO {
 	 private Date fecha;	
 	 private String imagen;	
 	 
+
+	 private UsuarioJsonDTO creador;	
+	 
 	 
 	public Long getId() {
 		return id;
@@ -47,6 +50,12 @@ public class PublicacionJsonDTO {
 	}
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+	public UsuarioJsonDTO getCreador() {
+		return creador;
+	}
+	public void setCreador(UsuarioJsonDTO creador) {
+		this.creador = creador;
 	}
 	 
 	 

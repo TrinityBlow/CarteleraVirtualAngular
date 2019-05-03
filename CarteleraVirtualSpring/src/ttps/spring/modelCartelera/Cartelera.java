@@ -11,10 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -43,7 +47,11 @@ public class Cartelera extends Activable implements Serializable {
 	 @JsonIgnore
 	 private List<Alumno> alumnos = new ArrayList<Alumno>();
 	 
-	 @ManyToMany(mappedBy="carteleras")
+	 @ManyToMany()
+	 @JoinTable(name="usuario_cartelera",
+		 joinColumns=@JoinColumn(name="id_cartelera",referencedColumnName="id_cartelera"),
+		 inverseJoinColumns = @JoinColumn(name="id_usuario",referencedColumnName="id_usuario")
+	 )
 	 @JsonIgnore
 	 private List<Usuario> miembros = new ArrayList<Usuario>();
 	 
@@ -125,6 +133,9 @@ public class Cartelera extends Activable implements Serializable {
 
 	public void setMiembros(List<Usuario> miembros) {
 		this.miembros = miembros;
+		for(Usuario miembro :miembros) {
+			miembro.addCartelera(this);
+		}
 	}
 
 
